@@ -27,6 +27,8 @@ Next.js + TypeScript gives typed server routes, server-rendered report pages, an
 
 ## Supabase Tables
 
+The schema is also available in `supabase/schema.sql`.
+
 ```sql
 create table audits (
   id uuid primary key,

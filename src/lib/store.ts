@@ -36,7 +36,7 @@ export async function saveAudit(result: AuditResult) {
   memoryAudits.set(id, publicResult);
   const client = supabase();
   if (client) {
-    await client.from("audits").insert({
+    const { error } = await client.from("audits").insert({
       id,
       team_size: result.teamSize,
       use_case: result.useCase,
@@ -45,6 +45,10 @@ export async function saveAudit(result: AuditResult) {
       total_annual_savings: result.totalAnnualSavings,
       result: publicResult
     });
+    if (error) {
+      console.error("Supabase audit insert failed", error.message);
+      await saveLocalAudit(publicResult);
+    }
   } else {
     await saveLocalAudit(publicResult);
   }
@@ -56,20 +60,28 @@ export async function getAudit(id: string) {
   if (cached) return cached;
   const client = supabase();
   if (!client) return getLocalAudit(id);
-  const { data } = await client.from("audits").select("result").eq("id", id).single();
-  return (data?.result as AuditResult | undefined) ?? null;
+  const { data, error } = await client.from("audits").select("result").eq("id", id).single();
+  if (error) {
+    console.error("Supabase audit lookup failed", error.message);
+    return getLocalAudit(id);
+  }
+  return (data?.result as AuditResult | undefined) ?? (await getLocalAudit(id));
 }
 
 export async function saveLead(lead: Lead) {
   const client = supabase();
   if (!client) return { stored: false };
-  await client.from("leads").insert({
+  const { error } = await client.from("leads").insert({
     audit_id: lead.auditId,
     email: lead.email,
     company_name: lead.companyName || null,
     role: lead.role || null,
     team_size: lead.teamSize || null
   });
+  if (error) {
+    console.error("Supabase lead insert failed", error.message);
+    return { stored: false };
+  }
   return { stored: true };
 }
 

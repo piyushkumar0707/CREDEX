@@ -1,0 +1,9 @@
+# Go-To-Market
+
+The exact first user is a technical founder, head of engineering, or founding engineer at a 5–50 person seed or Series A startup that has added AI tools quickly and now has a messy stack: Cursor for engineers, ChatGPT Team for the whole company, Claude Max for a few power users, and API bills that nobody audits until finance asks. They are not searching for “AI spend management” yet. They are searching or scrolling around terms like “Cursor team pricing,” “Claude Max limits,” “OpenAI API bill spike,” “GitHub Copilot enterprise worth it,” and “why is our AI bill so high.”
+
+The first channels should be narrow and founder-heavy: Hacker News Show HN, Indie Hackers, r/SaaS, r/startups, r/LocalLLaMA when the angle is API waste, founder Slack groups, YC Bookface if available through Credex, and X replies under posts about Cursor, Claude Code, Copilot pricing, or OpenAI API bill shocks. The message is not “try our SaaS.” It is “paste your AI stack and get a shareable overspend audit in 60 seconds.”
+
+The first 100 users in 30 days should come from daily direct distribution. Day one: launch a short teardown thread with three fake-but-realistic stacks and savings screenshots. Days two through seven: reply to pricing complaints with a useful audit angle and link. Week two: publish five public anonymized audits of common stacks. Week three: ask founders from the first cohort for permission to post before/after savings. Week four: ship a small embeddable calculator for AI tooling newsletters.
+
+The unfair Credex channel is access to discounted AI infrastructure credit supply. Most calculators can say “downgrade.” Credex can say “you can keep the same workflow and pay less than retail.” Week-one traction that would indicate signal: 150 completed audits, 30 captured emails, 8 high-savings consultations requested, and at least 3 founders replying with real bill details.

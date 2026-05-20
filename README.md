@@ -10,7 +10,7 @@ Add three screenshots after deployment:
 
 - Landing and spend input form
 - Audit result with per-tool recommendations
-- Public share URL preview
+- Public share URL preview with Open Graph image
 
 ## Quick Start
 
@@ -19,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Copy `.env.example` to `.env.local` or `.env` and fill Supabase, Groq, and Resend keys for full backend/email/AI behavior. Without keys, the app still runs locally with in-memory audit storage and templated AI summaries.
+Copy `.env.example` to `.env.local` or `.env` and fill Supabase, Groq, Resend, and `NEXT_PUBLIC_SITE_URL` for full backend/email/AI/social-preview behavior. Without keys, the app still runs locally with in-memory audit storage and templated AI summaries.
 
 ## Deploy
 

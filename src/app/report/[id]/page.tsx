@@ -13,8 +13,13 @@ export async function generateMetadata({ params }: Props) {
   return {
     title,
     description,
-    openGraph: { title, description, type: "article" },
-    twitter: { card: "summary_large_image", title, description }
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "SpendScope by Credex AI spend audit" }]
+    },
+    twitter: { card: "summary_large_image", title, description, images: ["/twitter-image"] }
   };
 }
 

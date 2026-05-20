@@ -4,7 +4,7 @@
 **Hours worked:** 4  
 **What I did:** Read the assignment closely, chose the stack, scaffolded the Next.js app, built the first audit engine, added API routes, lead capture, public reports, tests, CI, and required docs.  
 **What I learned:** The assignment rewards a product-shaped submission more than a narrow coding demo; the repo structure and written artifacts are part of the product.  
-**Blockers / what I'm stuck on:** Need real Supabase, Resend, Anthropic, deployment, screenshots, and user interviews before final submission.  
+**Blockers / what I'm stuck on:** Need real Supabase, Resend, Groq deployment settings, screenshots, and user interviews before final submission.  
 **Plan for tomorrow:** Verify pricing data from official pages, polish the UI, wire deployed environment variables, and run through the full end-to-end checklist.
 
 ## Day 2 — 2026-05-21

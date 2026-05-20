@@ -19,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Copy `.env.example` to `.env.local` and fill Supabase, Anthropic, and Resend keys for full backend/email/AI behavior. Without keys, the app still runs locally with in-memory audit storage and templated AI summaries.
+Copy `.env.example` to `.env.local` or `.env` and fill Supabase, Groq, and Resend keys for full backend/email/AI behavior. Without keys, the app still runs locally with in-memory audit storage and templated AI summaries.
 
 ## Deploy
 
@@ -31,4 +31,4 @@ Deploy to Vercel, add the environment variables from `.env.example`, and create 
 - Kept audit math deterministic because financial recommendations should be inspectable and testable.
 - Used Supabase instead of a custom Postgres server to ship a real backend quickly without auth complexity.
 - Used Resend because the API surface is small and works well from server routes.
-- Added fallback summaries so missing or failing Anthropic calls never block audit completion.
+- Added fallback summaries so missing or failing Groq calls never block audit completion.

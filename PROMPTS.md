@@ -1,6 +1,6 @@
 # Prompts
 
-## Audit Summary Prompt
+## Groq Audit Summary Prompt
 
 ```text
 Write a direct ~100-word AI spend audit summary for a {teamSize}-person startup using AI primarily for {useCase}. Current monthly spend is ${totalMonthlySpend}; estimated monthly savings is ${totalMonthlySavings}. Findings: {tool findings}. Be specific, honest, and do not invent vendors or guarantees.
@@ -9,6 +9,8 @@ Write a direct ~100-word AI spend audit summary for a {teamSize}-person startup 
 ## Why This Prompt
 
 The audit math is deterministic, so the LLM only turns already-computed findings into concise executive prose. The prompt includes team size, use case, current spend, savings, and line-item findings to prevent generic advice.
+
+Groq is used through its OpenAI-compatible Chat Completions API with `llama-3.3-70b-versatile` by default. The implementation falls back to a templated summary if the API key is missing, rate-limited, or returns a malformed response.
 
 ## What Did Not Work
 

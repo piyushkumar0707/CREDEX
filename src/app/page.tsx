@@ -41,7 +41,7 @@ export default function Home() {
   const totalSpend = useMemo(() => tools.reduce((sum, tool) => sum + Number(tool.monthlySpend || 0), 0), [tools]);
 
   function updateTool(index: number, patch: Partial<ToolInput>) {
-    setTools((items) => items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : itemIndex === index ? item : item)));
+    setTools((items) => items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)));
   }
 
   async function submit(event: React.FormEvent) {

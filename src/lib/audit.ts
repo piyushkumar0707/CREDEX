@@ -59,7 +59,11 @@ export function runAudit(input: AuditInput, summary = ""): AuditResult {
       reason = "The same category of AI infrastructure can be sourced below retail pricing without changing user workflow.";
     } else if (monthlySavings > 0) {
       const target = cheapestSeatPlan(tool, input.teamSize);
-      recommendedAction = `Right-size to ${target?.label ?? "a lower plan"}`;
+      if (target && target.label === tool.plan) {
+        recommendedAction = `Optimize seats or billing for ${tool.plan}`;
+      } else {
+        recommendedAction = `Right-size to ${target?.label ?? "a lower plan"}`;
+      }
       reason = `${tool.seats} seat(s) on ${tool.plan} exceeds what a ${input.teamSize}-person ${input.useCase} team usually needs.`;
     }
 

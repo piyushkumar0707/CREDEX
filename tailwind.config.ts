@@ -12,8 +12,12 @@ const config: Config = {
         clay: "#c8754d",
         paper: "#fbfaf5"
       },
+      fontFamily: {
+        sans: ["var(--font-sans)", "sans-serif"],
+      },
       boxShadow: {
-        soft: "0 18px 50px rgba(19, 32, 26, 0.10)"
+        soft: "0 18px 50px rgba(19, 32, 26, 0.10)",
+        card: "0 4px 20px rgba(19, 32, 26, 0.04)"
       }
     }
   },

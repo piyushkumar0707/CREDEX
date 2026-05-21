@@ -8,11 +8,11 @@
 **Plan for tomorrow:** Verify pricing data from official pages, polish the UI, wire deployed environment variables, and run through the full end-to-end checklist.
 
 ## Day 2 — 2026-05-21
-**Hours worked:** 1  
-**What I did:** Pushed local commits to GitHub to align with the assignment instructions and triggered/verified the CI environment. Verified the local Vitest suite to ensure all audit engine test cases are green. Refactored a redundant ternary condition in the frontend tool update state logic.  
-**What I learned:** Frequent commits and keeping track of the git calendar helps maintain good discipline and transparency for audit checks.  
-**Blockers / what I'm stuck on:** Waiting for final domain URL deployment and live Supabase configuration to finalize screenshots and record the final demo.  
-**Plan for tomorrow:** Prepare the user interview questions/notes and complete the rest of the documentation (REFLECTION.md, USER_INTERVIEWS.md).
+**Hours worked:** 3  
+**What I did:** Connected the Supabase database using the MCP server and executed the database schema (creating `audits` and `leads` tables with RLS and indexes). Polished the audit engine recommendation text logic, added a new test case for seat optimization, and verified the test suite. Redesigned the landing and results pages to use a premium styling layout, integrated Google Font (Plus Jakarta Sans), added unique IDs for automated testing, and bound the spam honeypot input. Verified local tests and Next.js builds.  
+**What I learned:** Connecting backend data stores early reduces integration risk; setting up stateful honeypot values is essential to prevent bot submissions from writing empty states.  
+**Blockers / what I'm stuck on:** None. Supabase is now successfully connected and database operations are working.  
+**Plan for tomorrow:** Complete the rest of the documentation (REFLECTION.md, USER_INTERVIEWS.md) and prepare the final repository for deployment checks.
 
 ## Day 3 — 2026-05-22
 **Hours worked:** 0  

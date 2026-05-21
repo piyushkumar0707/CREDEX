@@ -31,4 +31,14 @@ describe("audit engine", () => {
     expect(result.findings[0].recommendedAction).toContain("Right-size");
     expect(result.totalAnnualSavings).toBeGreaterThan(7000);
   });
+
+  it("recommends seat optimization when plan is correct but spend is over-allocated", () => {
+    const result = runAudit({
+      teamSize: 5,
+      useCase: "coding",
+      tools: [{ tool: "github-copilot", plan: "Business", monthlySpend: 150, seats: 5 }]
+    });
+    expect(result.findings[0].recommendedAction).toContain("Optimize seats or billing");
+    expect(result.totalMonthlySavings).toBe(55);
+  });
 });

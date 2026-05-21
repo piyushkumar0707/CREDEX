@@ -65,85 +65,214 @@ export default function Home() {
   if (result) return <ResultsView result={result} />;
 
   return (
-    <main className="min-h-screen bg-paper">
-      <section className="border-b border-ink/10 bg-mint">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-10 md:grid-cols-[0.9fr_1.1fr] md:py-14">
+    <main className="min-h-screen bg-paper pb-20 selection:bg-lemon selection:text-ink">
+      {/* Top Brand Stripe */}
+      <div className="h-1.5 w-full bg-gradient-to-r from-moss via-mint to-clay" />
+
+      {/* Hero Header Area */}
+      <section className="relative overflow-hidden border-b border-ink/10 bg-gradient-to-b from-mint/55 to-mint/5 py-12 md:py-16">
+        <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.10fr_0.90fr] items-center">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-moss">SpendScope by Credex</p>
-            <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">Find wasted AI spend</h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-ink/75">Audit Cursor, Copilot, Claude, ChatGPT, Gemini, API usage, and more before the next invoice lands.</p>
+            <div className="inline-flex items-center gap-2 rounded-full border border-moss/20 bg-white/90 px-3.5 py-1.5 text-xs font-bold text-moss shadow-sm backdrop-blur-sm">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-clay animate-pulse" />
+              SpendScope by Credex
+            </div>
+            <h1 className="mt-6 text-4xl font-black tracking-tight leading-[1.1] text-ink sm:text-6xl">
+              Find wasted <span className="bg-gradient-to-r from-moss to-clay bg-clip-text text-transparent">AI spend</span>
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-ink/75 sm:text-lg">
+              Audit Cursor, Copilot, Claude, ChatGPT, Gemini, and API usage before the next invoice lands. Get an instant, shareable report.
+            </p>
           </div>
-          <div className="rounded-lg border border-ink/10 bg-paper p-5 shadow-soft">
-            <p className="text-sm font-bold uppercase text-moss">Current stack</p>
-            <p className="mt-2 text-4xl font-black">${totalSpend.toLocaleString()}/mo</p>
-            <p className="mt-3 leading-7 text-ink/70">Enter what the team actually pays. The report appears before any email gate.</p>
+          <div className="rounded-2xl border border-ink/10 bg-white p-6 shadow-soft backdrop-blur-md transition-all duration-300 hover:shadow-xl">
+            <p className="text-xs font-bold uppercase tracking-wider text-moss">Current stack baseline</p>
+            <p className="mt-2 text-5xl font-black text-ink tracking-tight">
+              ${totalSpend.toLocaleString()}<span className="text-lg font-medium text-ink/50">/mo</span>
+            </p>
+            <div className="mt-4 h-2 w-full rounded-full bg-paper overflow-hidden">
+              <div className="h-full bg-moss rounded-full transition-all duration-500" style={{ width: `${Math.min(100, (totalSpend / 1500) * 100)}%` }} />
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-ink/70">
+              Enter your team size and active subscriptions. Your detailed audit is generated instantly on the next screen.
+            </p>
           </div>
         </div>
       </section>
 
-      <form className="mx-auto max-w-6xl px-5 py-10" onSubmit={submit}>
-        <div className="grid gap-4 md:grid-cols-2">
-          <label className="grid gap-2 font-bold">
-            Team size
-            <input className="rounded-md border border-ink/15 px-3 py-3 font-normal" type="number" min={1} value={teamSize} onChange={(event) => setTeamSize(Number(event.target.value))} />
-          </label>
-          <label className="grid gap-2 font-bold">
-            Primary use case
-            <select className="rounded-md border border-ink/15 px-3 py-3 font-normal" value={useCase} onChange={(event) => setUseCase(event.target.value as UseCase)}>
-              {["coding", "writing", "data", "research", "mixed"].map((value) => <option key={value}>{value}</option>)}
-            </select>
-          </label>
-        </div>
+      {/* Main Interactive Form */}
+      <div className="mx-auto max-w-6xl px-6 py-10">
+        <form className="space-y-8" onSubmit={submit}>
+          {/* Metadata Block */}
+          <div className="grid gap-6 rounded-2xl border border-ink/10 bg-white p-6 shadow-card md:grid-cols-2">
+            <div className="grid gap-2">
+              <label htmlFor="team-size" className="text-sm font-bold text-ink flex items-center justify-between">
+                <span>Team size</span>
+                <span className="text-xs text-moss font-semibold">For plan eligibility</span>
+              </label>
+              <input
+                id="team-size"
+                className="w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold"
+                type="number"
+                min={1}
+                value={teamSize}
+                onChange={(event) => setTeamSize(Number(event.target.value))}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <label htmlFor="use-case" className="text-sm font-bold text-ink flex items-center justify-between">
+                <span>Primary use case</span>
+                <span className="text-xs text-moss font-semibold">For alternative recommendations</span>
+              </label>
+              <select
+                id="use-case"
+                className="w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold capitalize"
+                value={useCase}
+                onChange={(event) => setUseCase(event.target.value as UseCase)}
+              >
+                {["coding", "writing", "data", "research", "mixed"].map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-        <div className="mt-8 flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-black">Paid AI tools</h2>
-          <button type="button" className="inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2 font-bold text-white" onClick={() => setTools((items) => [...items, defaultTool])}>
-            <Plus size={18} /> Add tool
-          </button>
-        </div>
-
-        <div className="mt-5 grid gap-4">
-          {tools.map((tool, index) => (
-            <div className="grid gap-3 rounded-lg border border-ink/10 bg-white p-4 shadow-sm md:grid-cols-[1fr_1fr_140px_140px_auto]" key={`${index}-${tool.tool}`}>
-              <label className="grid gap-2 text-sm font-bold">
-                Tool
-                <select
-                  className="rounded-md border border-ink/15 px-3 py-3 font-normal"
-                  value={tool.tool}
-                  onChange={(event) => {
-                    const nextTool = event.target.value as ToolKey;
-                    updateTool(index, { tool: nextTool, plan: PLAN_PRICES[nextTool][0].label });
-                  }}
-                >
-                  {(Object.keys(TOOL_LABELS) as ToolKey[]).map((key) => <option value={key} key={key}>{TOOL_LABELS[key]}</option>)}
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-bold">
-                Plan
-                <select className="rounded-md border border-ink/15 px-3 py-3 font-normal" value={tool.plan} onChange={(event) => updateTool(index, { plan: event.target.value })}>
-                  {PLAN_PRICES[tool.tool].map((plan) => <option key={plan.label}>{plan.label}</option>)}
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-bold">
-                Spend
-                <input className="rounded-md border border-ink/15 px-3 py-3 font-normal" type="number" min={0} value={tool.monthlySpend} onChange={(event) => updateTool(index, { monthlySpend: Number(event.target.value) })} />
-              </label>
-              <label className="grid gap-2 text-sm font-bold">
-                Seats
-                <input className="rounded-md border border-ink/15 px-3 py-3 font-normal" type="number" min={1} value={tool.seats} onChange={(event) => updateTool(index, { seats: Number(event.target.value) })} />
-              </label>
-              <button type="button" className="self-end rounded-md border border-ink/15 p-3" aria-label="Remove tool" onClick={() => setTools((items) => items.filter((_, itemIndex) => itemIndex !== index))}>
-                <Trash2 size={18} />
+          {/* Tools Allocation List */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-black text-ink tracking-tight">Active subscriptions</h2>
+                <p className="text-sm text-ink/60 mt-1">Configure each paid tool and current team seats</p>
+              </div>
+              <button
+                id="add-tool-btn"
+                type="button"
+                className="inline-flex items-center gap-2 rounded-xl bg-ink hover:bg-moss text-white px-5 py-3 font-bold text-sm shadow-md transition-all duration-200 hover:scale-[1.01]"
+                onClick={() => setTools((items) => [...items, defaultTool])}
+              >
+                <Plus size={16} /> Add tool
               </button>
             </div>
-          ))}
-        </div>
 
-        {error ? <p className="mt-4 font-bold text-clay">{error}</p> : null}
-        <button className="mt-8 inline-flex items-center gap-2 rounded-md bg-clay px-6 py-4 text-lg font-black text-white" disabled={loading}>
-          {loading ? "Running audit..." : "Run free audit"} <ArrowRight size={20} />
-        </button>
-      </form>
+            <div className="grid gap-4">
+              {tools.map((tool, index) => (
+                <div
+                  className="grid gap-4 rounded-2xl border border-ink/10 bg-white p-5 shadow-card md:grid-cols-[1.2fr_1fr_120px_120px_auto] items-end transition-all hover:border-moss/20"
+                  key={`${index}-${tool.tool}`}
+                >
+                  <div className="grid gap-2">
+                    <label htmlFor={`tool-select-${index}`} className="text-xs font-bold uppercase tracking-wider text-ink/65">
+                      Tool Name
+                    </label>
+                    <select
+                      id={`tool-select-${index}`}
+                      className="rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold"
+                      value={tool.tool}
+                      onChange={(event) => {
+                        const nextTool = event.target.value as ToolKey;
+                        updateTool(index, { tool: nextTool, plan: PLAN_PRICES[nextTool][0].label });
+                      }}
+                    >
+                      {(Object.keys(TOOL_LABELS) as ToolKey[]).map((key) => (
+                        <option value={key} key={key}>
+                          {TOOL_LABELS[key]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor={`plan-select-${index}`} className="text-xs font-bold uppercase tracking-wider text-ink/65">
+                      Active Plan
+                    </label>
+                    <select
+                      id={`plan-select-${index}`}
+                      className="rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold"
+                      value={tool.plan}
+                      onChange={(event) => updateTool(index, { plan: event.target.value })}
+                    >
+                      {PLAN_PRICES[tool.tool].map((plan) => (
+                        <option key={plan.label} value={plan.label}>
+                          {plan.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor={`spend-input-${index}`} className="text-xs font-bold uppercase tracking-wider text-ink/65">
+                      Spend ($)
+                    </label>
+                    <input
+                      id={`spend-input-${index}`}
+                      className="rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold"
+                      type="number"
+                      min={0}
+                      value={tool.monthlySpend}
+                      onChange={(event) => updateTool(index, { monthlySpend: Number(event.target.value) })}
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor={`seats-input-${index}`} className="text-xs font-bold uppercase tracking-wider text-ink/65">
+                      Seats
+                    </label>
+                    <input
+                      id={`seats-input-${index}`}
+                      className="rounded-xl border border-ink/15 bg-paper px-4 py-3 text-ink transition-all focus:border-moss focus:bg-white focus:ring-1 focus:ring-moss font-semibold"
+                      type="number"
+                      min={1}
+                      value={tool.seats}
+                      onChange={(event) => updateTool(index, { seats: Number(event.target.value) })}
+                    />
+                  </div>
+
+                  <button
+                    id={`remove-tool-btn-${index}`}
+                    type="button"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ink/15 hover:border-clay hover:bg-clay/5 hover:text-clay text-ink/60 transition-colors"
+                    aria-label="Remove tool"
+                    onClick={() => setTools((items) => items.filter((_, itemIndex) => itemIndex !== index))}
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Action Trigger Block */}
+          <div className="pt-6 border-t border-ink/10 flex flex-col items-center sm:items-start gap-4">
+            {error ? (
+              <div className="w-full max-w-md rounded-xl border border-clay/20 bg-clay/5 p-4 text-sm font-semibold text-clay">
+                {error}
+              </div>
+            ) : null}
+            <button
+              id="submit-audit-btn"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-clay hover:bg-clay/90 text-white px-8 py-4 font-black text-lg shadow-lg transition-all duration-200 disabled:opacity-75 disabled:cursor-not-allowed hover:scale-[1.01]"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Running audit...
+                </>
+              ) : (
+                <>
+                  Run free audit <ArrowRight size={20} />
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }
